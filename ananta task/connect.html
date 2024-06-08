@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect</title>
+</head>
+<body>
+    <h1>Cancer Patients Database</h1>
+    <ul id="patient-list"></ul>
+
+    <script>
+        // Fetch data from server and display it
+        fetch('/cancer-patients')
+            .then(response => response.json())
+            .then(data => {
+                const patientList = document.getElementById('patient-list');
+                data.forEach(patient => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${patient.name} - ${patient.cancerType}`;
+                    patientList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

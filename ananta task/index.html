@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate for Cancer Patients</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #007bff; /* Blue background color */
+            padding: 1rem;
+            text-align: center;
+        }
+        h1 {
+            color: white; /* White text color */
+        }
+        nav {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            color: #28a745;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select {
+            width: calc(100% - 2rem);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        button {
+            width: calc(100% - 2rem);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            padding: 2rem 1rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .sidebar img {
+            width: 80%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .sidebar a {
+            margin: 1rem 0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: white;
+        }
+        .sidebar a:hover {
+            color: #28a745;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+        }
+        #about-text {
+            font-size: 1.2rem;
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Donate for Cancer Patients</h1>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#donorLogin">Donor Login</a>
+    <a href="#patientLogin">Patient Login</a>
+    <a href="#donate">Donate</a>
+    <a href="#cancerPatients" onclick="openConnectPopup(event)">Connect</a>
+</nav>
+
+<div class="sidebar">
+    <img src="https://support.nhfoundation.org.au/image/cancer-giving-tree/NHF-CancerGivingTree-Plaques-Teal-Butterfly-400-x-308---Copy.jpg" alt="Organization Logo">
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#donorLogin">Donor Login</a>
+    <a href="#patientLogin">Patient Login</a>
+    <a href="#donate">Donate</a>
+    <a href="#cancerPatients" onclick="openConnectPopup(event)">Connect</a>
+</div>
+
+<main>
+    <div id="home" class="container active">
+        <h2>Welcome to Our Donation Site</h2>
+        <p>We are dedicated to helping cancer patients through your generous donations. Your support can make a huge difference in someone's life.</p>
+        <img src="https://www.articlestheme.com/wp-content/uploads/2021/08/maxresdefault-1068x601.jpg" alt="Helping Hands">
+    </div>
+
+    <div id="about" class="container hidden">
+        <h2>About Us</h2>
+        <p id="about-text">Our organization is committed to supporting cancer patients in need. We believe in the power of community and collective effort to make a positive impact. Through our platform, we aim to connect donors with cancer patients in a transparent and efficient manner. Together, we can make a difference and provide hope to those fighting cancer.</p>
+    </div>
+
+    <div id="donorLogin" class="container hidden">
+        <h2>Donor Login</h2>
+        <form id="donorLoginForm">
+            <input type="text" id="donorUsername" placeholder="Username" required>
+            <input type="password" id="donorPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="donorLoginMessage" style="color: green; display: none;">Login successful!</p>
+    </div>
+
+    <div id="patientLogin" class="container hidden">
+        <h2>Patient Login</h2>
+        <form id="patientLoginForm">
+            <input type="text" id="patientUsername" placeholder="Username" required>
+            <input type="password" id="patientPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="patientLoginMessage" style="color: green; display: none;">Login successful!</p>
+    
+
+        <div id="donate" class="container hidden">
+            <h2>Donate</h2>
+            <form id="donationForm" onsubmit="redirectToPaymentPortal(event)">
+                <input type="number" id="donationAmount" placeholder="Donation Amount (₹)" required>
+                <select id="paymentMethod" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="upi">UPI</option>
+                    <option value="creditCard">Credit Card</option>
+                </select>
+                <button type="submit">Donate Now</button>
+            </form>
+            <p id="donationMessage" style="color: green; display: none;">Thank you for your donation!</p>
+        </div>
+
+        
+        <script>
+            function openConnectPopup(event) {
+                event.preventDefault(); // Prevent default link behavior
+                // Check if user is logged in (you need to implement this logic)
+                var isLoggedIn = false; // Set to true if user is logged in
+                if (!isLoggedIn) {
+                    alert("Please log in to connect to donor or cancer patients");
+                } else {
+                    // Open your connect popup or perform any other action
+                    alert("Opening connect popup...");
+                }
+            }
+        </script>
+
+        
+        <script>
+            function redirectToPaymentPortal(event) {
+                event.preventDefault(); // Prevent form submission
+                var donationAmount = document.getElementById("donationAmount").value;
+                var paymentMethod = document.getElementById("paymentMethod").value;
+                // Assuming the payment portal URL is https://examplepaymentportal.com
+                var paymentPortalUrl = "https://examplepaymentportal.com?amount=" + donationAmount + "&method=" + paymentMethod;
+                window.location.href = paymentPortalUrl; // Redirect to the payment portal
+            }
+
+        </script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<script>
+    function onSignIn(googleUser) {
+        // Retrieve Google user information
+        var profile = googleUser.getBasicProfile();
+        var userEmail = profile.getEmail();
+        var userName = profile.getName();
+        // Perform your actions with user information (e.g., login process)
+        console.log('Logged in as: ' + userEmail + ' (' + userName + ')');
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+
+    function startGoogleSignIn() {
+        gapi.auth2.getAuthInstance().signIn();
+    }
+</script>
+
+<!-- Place this where you want the custom sign-in button to appear -->
+<button onclick="startGoogleSignIn()">Sign in with Google</button>
+
+<!-- Place this where you want the sign-in button to appear -->
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+        
+                    
